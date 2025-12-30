@@ -1,4 +1,5 @@
 import React from "react";
+import { View, Text, StyleSheet, ActivityIndicator } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { useAuth } from "@clerk/clerk-expo";
@@ -20,20 +21,27 @@ import ErrorScreen from "../screens/ErrorScreen";
 
 const Stack = createNativeStackNavigator();
 
+// Loading screen while Clerk initializes
+const LoadingScreen = () => (
+  <View style={styles.loadingContainer}>
+    <ActivityIndicator size="large" color="#4285F4" />
+    <Text style={styles.loadingText}>Loading...</Text>
+  </View>
+);
+
 const Navigation = () => {
   const { isSignedIn, isLoaded } = useAuth();
 
   if (!isLoaded) {
-    return <SplashScreen />;
+    return <LoadingScreen />;
   }
 
   return (
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
         {!isSignedIn ? (
-          // Auth screens
+          // Auth screens - start with SignIn
           <>
-            <Stack.Screen name="SplashScreen" component={SplashScreen} />
             <Stack.Screen name="SignInScreen" component={SignInScreen} />
             <Stack.Screen name="SignUpScreen" component={SignUpScreen} />
           </>
@@ -41,6 +49,7 @@ const Navigation = () => {
           // App screens (authenticated)
           <>
             <Stack.Screen name="HomeScreen" component={HomeScreen} />
+            <Stack.Screen name="SplashScreen" component={SplashScreen} />
             <Stack.Screen name="CameraScreen" component={CameraScreen} />
             <Stack.Screen name="MapScreen" component={MapScreen} />
             <Stack.Screen name="UploadConfirmationScreen" component={UploadConfirmationScreen} />
@@ -56,5 +65,19 @@ const Navigation = () => {
     </NavigationContainer>
   );
 };
+
+const styles = StyleSheet.create({
+  loadingContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#fff",
+  },
+  loadingText: {
+    marginTop: 10,
+    fontSize: 16,
+    color: "#666",
+  },
+});
 
 export default Navigation;
