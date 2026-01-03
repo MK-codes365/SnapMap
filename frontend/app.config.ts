@@ -1,7 +1,4 @@
 import { ExpoConfig } from "@expo/config";
-import getLocalIPAddress from "./getLocalIPAddress";
-
-const LOCAL_IP = getLocalIPAddress();
 
 const config: ExpoConfig = {
   name: "Snap Map",
@@ -9,8 +6,8 @@ const config: ExpoConfig = {
   version: "1.0.0",
 
   extra: {
-    API_BASE_URL: `http://${LOCAL_IP}:5000`
-  }
+    API_BASE_URL: process.env.EXPO_PUBLIC_API_BASE_URL,
+  },
 };
 
 export default config;
