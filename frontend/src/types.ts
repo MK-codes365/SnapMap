@@ -6,6 +6,8 @@ export type RootParamList = {
   SplashScreen: undefined;
   SignInScreen: undefined;
   HomeScreen: undefined;
+  CameraPermissionScreen: undefined;
+  LocationPermissionScreen: undefined;
   CameraScreen: undefined;
   MapScreen: undefined;
   UploadConfirmationScreen:

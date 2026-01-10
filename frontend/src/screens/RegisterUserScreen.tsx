@@ -162,7 +162,7 @@ const RegisterUserScreen = ({ navigation }: ScreenProps<"RegisterUserScreen">) =
       Alert.alert("Success", "Registration completed successfully!", [
         {
           text: "OK",
-          onPress: () => navigation.replace("HomeScreen"),
+          onPress: () => navigation.replace("CameraPermissionScreen"),
         },
       ]);
     } 
