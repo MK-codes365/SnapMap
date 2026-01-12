@@ -1,10 +1,9 @@
 import React from "react";
 import { View, TouchableOpacity, StyleSheet } from "react-native";
-import { MaterialCommunityIcons, FontAwesome } from "@expo/vector-icons";
+import { MaterialCommunityIcons, FontAwesome, Ionicons } from "@expo/vector-icons";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import type { RootParamList } from "../types";
-import PersonIcon from "../assets/icons/PersonIcon";
 
 type NavigationProp = NativeStackNavigationProp<RootParamList>;
 
@@ -34,15 +33,15 @@ const BottomNavigation = () => {
         {/* Spacer for center button */}
         <View style={{ width: 72 }} />
 
-        {/* Right - Profile Button */}
+        {/* Right - Event Gallery Button */}
         <TouchableOpacity
           style={styles.navItem}
-          onPress={() => navigation.navigate("ProfileScreen")}
+          onPress={() => navigation.navigate("EventGalleryScreen")}
         >
-          <PersonIcon
-            width={26}
-            height={26}
-            color={isActive("ProfileScreen") ? "#EF4444" : "#9CA3AF"}
+          <Ionicons
+            name="images-outline"
+            size={26}
+            color={isActive("EventGalleryScreen") ? "#EF4444" : "#9CA3AF"}
           />
         </TouchableOpacity>
       </View>
