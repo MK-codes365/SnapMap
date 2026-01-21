@@ -316,31 +316,4 @@ export const uploadPhotos = async (req, res) => {
   }
 
 };
-export const getUserPhotos = async (req, res) => {
-  try {
-    console.log("📂 Fetching user photos");
-
-    // authMiddleware sets this
-    const clerkUserId = req.userId;
-
-    if (!clerkUserId) {
-      return res.status(401).json({ message: "Unauthorized" });
-    }
-
-    const photos = await Photo.find({ clerkUserId })
-      .sort({ timestamp: -1 })
-      .lean();
-
-    console.log(`✅ Found ${photos.length} photos for user ${clerkUserId}`);
-
-    return res.status(200).json({
-      photos: photos.map((p) => p.imageUrl),
-    });
-  } catch (error) {
-    console.error("Error fetching user photos:", error);
-    return res.status(500).json({
-      message: "Internal server error: " + error.message,
-    });
-  }
-};
 
